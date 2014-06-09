@@ -1,0 +1,26 @@
+inherit qt4-cmake
+
+NAME="pcmanfm-qt"
+VERSION=0.7.0
+RELEASE=1
+CATEGORY="X11"
+SUMMARY="LXQt file manager"
+DESCRIPTION="LXQt is the Qt port and the upcoming version of LXDE. It is the
+product of the merge between the LXDE-Qt and the Razor-qt projects: A
+lightweight, modular, blazing-fast and user-friendly desktop environment."
+HOMEPAGE="http://lxqt.org/"
+SRC_URI="http://lxqt.org/downloads/lxqt/${VERSION}/${NAME}-${VERSION}.tar.xz"
+SRC_DIR=.
+PATCH_URI="
+	0.7.0-cxxflags.patch
+	0.7.0-cmake-install.patch
+"
+
+PKG_NAMES="${NAME} libfm-qt0 libfm-qt-devel"
+pcmanfm_qt_CONTENTS="etc/ usr/bin/pcmanfm-qt.exe usr/share/applications/ usr/share/doc/"
+libfm_qt0_CATEGORY="Libs"
+libfm_qt0_SUMMARY="${SUMMARY} library"
+libfm_qt0_CONTENTS="usr/bin/cygfm-qt-0*.dll"
+libfm_qt_devel_CATEGORY="Libs"
+libfm_qt_devel_SUMMARY="${SUMMARY} library"
+libfm_qt_devel_CONTENTS="usr/include/ usr/lib/"
