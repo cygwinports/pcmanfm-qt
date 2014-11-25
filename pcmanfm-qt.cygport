@@ -1,7 +1,7 @@
-inherit qt4-cmake
+inherit qt5 cmake
 
 NAME="pcmanfm-qt"
-VERSION=0.7.0
+VERSION=0.8.0
 RELEASE=1
 CATEGORY="X11"
 SUMMARY="LXQt file manager"
@@ -10,17 +10,25 @@ product of the merge between the LXDE-Qt and the Razor-qt projects: A
 lightweight, modular, blazing-fast and user-friendly desktop environment."
 HOMEPAGE="http://lxqt.org/"
 SRC_URI="http://lxqt.org/downloads/lxqt/${VERSION}/${NAME}-${VERSION}.tar.xz"
-SRC_DIR=.
 PATCH_URI="
-	0.7.0-cxxflags.patch
-	0.7.0-cmake-install.patch
+	0.8.0-cmake-install.patch
 "
 
-PKG_NAMES="${NAME} libfm-qt0 libfm-qt-devel"
-pcmanfm_qt_CONTENTS="etc/ usr/bin/pcmanfm-qt.exe usr/share/applications/ usr/share/doc/"
-libfm_qt0_CATEGORY="Libs"
-libfm_qt0_SUMMARY="${SUMMARY} library"
-libfm_qt0_CONTENTS="usr/bin/cygfm-qt-0*.dll"
-libfm_qt_devel_CATEGORY="Libs"
-libfm_qt_devel_SUMMARY="${SUMMARY} library"
-libfm_qt_devel_CONTENTS="usr/include/ usr/lib/"
+PKG_NAMES="${NAME} libfm-qt5_1 libfm-qt5-common libfm-qt5-devel"
+pcmanfm_qt_CONTENTS="etc/ usr/bin/pcmanfm-qt.exe usr/share/applications/
+	usr/share/doc/ usr/share/man/ usr/share/${NAME}/"
+libfm_qt5_1_CATEGORY="Libs"
+libfm_qt5_1_SUMMARY="${SUMMARY} library"
+libfm_qt5_1_REQUIRES="libfm-qt5-common"
+libfm_qt5_1_CONTENTS="usr/bin/cygfm-qt5-1.dll"
+libfm_qt5_common_CATEGORY="Libs"
+libfm_qt5_common_SUMMARY="${SUMMARY} library"
+libfm_qt5_common_CONTENTS="usr/share/libfm-qt/"
+libfm_qt5_devel_CATEGORY="Libs"
+libfm_qt5_devel_SUMMARY="${SUMMARY} library"
+libfm_qt5_devel_OBSOLETES="libfm-qt-devel"
+libfm_qt5_devel_CONTENTS="usr/include/ usr/lib/"
+
+DIFF_EXCLUDES="*.ts"
+
+export USE_QT5=1
